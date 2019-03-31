@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package proto;
+
+import "google/api/annotations.proto";
+
+message Empty {}
+
+message VersionResponse {
+    string VersionString = 1;
+}
+
+message Book {
+    string ISBN = 1;
+    string Title = 2;
+    repeated Author author = 3;
+    optional repeated string author = 3;
+}
+
+message Author {
+    uint32 AuthorId = 1
+    string FirstName = 2;
+    string LastName = 3;
+}
+
+message Error {
+    uint32 Code = 1;
+    string Message = 2;
+}
+
+message CreateBookRequest {
+    repeated Book = 1;
+}
+
+message CreateBookResponse {
+    Error = 1;
+    string IRI = 2;
+}
+
+message UpdateBookRequest {
+    string IRI = 1;
+}
+
+message UpdateBookResponse {
+    Book item = 1;
+}
+
+message GetBookRequest {
+    string IRI = 1;
+}
+
+message GetBookResponse {
+    Book item = 1;
+}
+
+message DeleteBookRequest {
+    string IRI = 1;
+}
+
+message DeleteBookResponse {
+    Book item = 1;
+}
+
+service API {
+    rpc CreateBook(CreateBookRequest) returns (CreateBookResponse) {
+        option (google.api.http) = {
+            post: "/v1/api/CreateBook"
+            body: "*"
+        };
+    }
+
+    rpc GetBook(GetBookRequest) returns (GetBookResponse) {
+        option (google.api.http) = {
+            post: "/v1/api/GetBook"
+            body: "*"
+        };
+    }
+
+    rpc UpdateBook(UpdateBookRequest) returns (UpdateBookResponse) {
+        option (google.api.http) = {
+            post: "/v1/api/UpdateBook"
+            body: "*"
+        };
+    }
+
+    rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse) {
+        option (google.api.http) = {
+            post: "/v1/api/DeleteBook"
+            body: "*"
+        };
+    }
+
+    rpc GetVersion(Empty) returns (VersionResponse) {
+        option (google.api.http) = {
+            get: "/v1/api/GetVersion"
+        };
+    }
+}
+
+
