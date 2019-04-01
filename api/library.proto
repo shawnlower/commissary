@@ -14,11 +14,10 @@ message Book {
     string ISBN = 1;
     string Title = 2;
     repeated Author author = 3;
-    optional repeated string author = 3;
 }
 
 message Author {
-    uint32 AuthorId = 1
+    uint32 AuthorId = 1;
     string FirstName = 2;
     string LastName = 3;
 }
@@ -29,11 +28,11 @@ message Error {
 }
 
 message CreateBookRequest {
-    repeated Book = 1;
+    repeated Book book = 1;
 }
 
 message CreateBookResponse {
-    Error = 1;
+    Error error = 1;
     string IRI = 2;
 }
 

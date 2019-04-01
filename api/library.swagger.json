@@ -1,0 +1,263 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/library.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/api/CreateBook": {
+      "post": {
+        "operationId": "CreateBook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoCreateBookResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoCreateBookRequest"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/api/DeleteBook": {
+      "post": {
+        "operationId": "DeleteBook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoDeleteBookResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoDeleteBookRequest"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/api/GetBook": {
+      "post": {
+        "operationId": "GetBook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoGetBookResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoGetBookRequest"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/api/GetVersion": {
+      "get": {
+        "operationId": "GetVersion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoVersionResponse"
+            }
+          }
+        },
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/api/UpdateBook": {
+      "post": {
+        "operationId": "UpdateBook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoUpdateBookResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoUpdateBookRequest"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protoAuthor": {
+      "type": "object",
+      "properties": {
+        "AuthorId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        }
+      }
+    },
+    "protoBook": {
+      "type": "object",
+      "properties": {
+        "ISBN": {
+          "type": "string"
+        },
+        "Title": {
+          "type": "string"
+        },
+        "author": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protoAuthor"
+          }
+        }
+      }
+    },
+    "protoCreateBookRequest": {
+      "type": "object",
+      "properties": {
+        "book": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protoBook"
+          }
+        }
+      }
+    },
+    "protoCreateBookResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/protoError"
+        },
+        "IRI": {
+          "type": "string"
+        }
+      }
+    },
+    "protoDeleteBookRequest": {
+      "type": "object",
+      "properties": {
+        "IRI": {
+          "type": "string"
+        }
+      }
+    },
+    "protoDeleteBookResponse": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "$ref": "#/definitions/protoBook"
+        }
+      }
+    },
+    "protoError": {
+      "type": "object",
+      "properties": {
+        "Code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Message": {
+          "type": "string"
+        }
+      }
+    },
+    "protoGetBookRequest": {
+      "type": "object",
+      "properties": {
+        "IRI": {
+          "type": "string"
+        }
+      }
+    },
+    "protoGetBookResponse": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "$ref": "#/definitions/protoBook"
+        }
+      }
+    },
+    "protoUpdateBookRequest": {
+      "type": "object",
+      "properties": {
+        "IRI": {
+          "type": "string"
+        }
+      }
+    },
+    "protoUpdateBookResponse": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "$ref": "#/definitions/protoBook"
+        }
+      }
+    },
+    "protoVersionResponse": {
+      "type": "object",
+      "properties": {
+        "VersionString": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
